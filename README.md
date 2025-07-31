@@ -1,3 +1,3 @@
-# BasketClub API REST
+# BasketClub API
 
-### Basketball Club Management System
+### API Rest for the management of a basketball club ball
