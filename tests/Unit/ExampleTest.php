@@ -4,6 +4,10 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Unit Test: Prueban unidades individuales de codigo de manera aislada.
+ */
+
 class ExampleTest extends TestCase
 {
     /**
