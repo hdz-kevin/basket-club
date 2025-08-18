@@ -82,4 +82,37 @@ class PlayerController extends Controller
             201,
         );
     }
+
+    /**
+     * Update an existing player or respond with a 404 if not found.
+     *
+     * @param Request $request
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, string $id)
+    {
+        $player = Player::find($id);
+
+        if (!$player) {
+            return response()->json(['message' => "Player with id $id not found"], 404);
+        }
+
+        $validated = $request->validate([
+            'first_name' => 'sometimes|string|max:255',
+            'last_name' => 'sometimes|string|max:255',
+            'gender' => 'sometimes|in:male,female,other',
+            'birth_date' => 'sometimes|date|before_or_equal:'.Carbon::now()->subYears(6),
+        ]);
+
+        $player->update($validated);
+
+        return response()->json(
+            [
+                'message' => 'Player successfully updated',
+                'player' => $player,
+            ],
+            200,
+        );
+    }
 }
