@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -54,5 +55,31 @@ class PlayerController extends Controller
         }
 
         return response()->json($players, 200);
+    }
+
+    /**
+     * Store a new player.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|in:male,female,other',
+            'birth_date' => 'required|date|before_or_equal:'.Carbon::now()->subYears(6),
+        ]);
+
+        $player = Player::create($validated);
+
+        return response()->json(
+            [
+                'message' => 'Player successfully created',
+                'player' => $player,
+            ],
+            201,
+        );
     }
 }

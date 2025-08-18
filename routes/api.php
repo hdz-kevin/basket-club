@@ -11,9 +11,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::get('/players', [PlayerController::class, 'index'])->middleware([ApiForceAcceptHeader::class]);
-Route::get('/players/{id}', [PlayerController::class, 'show'])->middleware([ApiForceAcceptHeader::class]);
-Route::get('/players/first_name/{first_name}', [PlayerController::class, 'showByFirstName'])
-        ->middleware([ApiForceAcceptHeader::class]);
+Route::middleware([ApiForceAcceptHeader::class])->group(function () {
+    Route::get('/players', [PlayerController::class, 'index']);
+    Route::get('/players/{id}', [PlayerController::class, 'show']);
+    Route::get('/players/first_name/{first_name}', [PlayerController::class, 'showByFirstName']);
+    Route::post('/players', [PlayerController::class, 'store']);
+});
 
 Route::get('/teams', [TeamController::class, 'index'])->middleware([ApiForceAcceptHeader::class]);
