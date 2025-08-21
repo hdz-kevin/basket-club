@@ -115,4 +115,23 @@ class PlayerController extends Controller
             200,
         );
     }
+
+    /**
+     * Delete a player by ID.
+     *
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(string $id)
+    {
+        $player = Player::find($id);
+
+        if (!$player) {
+            return response()->json(['message' => "Player with id $id not found"], 404);
+        }
+
+        $player->delete();
+
+        return response()->json(['message' => "Player with id $id successfully deleted"], 200);
+    }
 }
