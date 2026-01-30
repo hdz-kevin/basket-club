@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::middleware('api')
-                ->prefix('v1')
+                ->prefix(env('APP_VER'))
                 ->name('api')
                 ->group(base_path('routes/api.php'));
             },
