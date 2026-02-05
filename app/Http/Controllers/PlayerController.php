@@ -71,4 +71,32 @@ class PlayerController extends Controller
             'player' => $player,
         ], 201);
     }
+
+    /**
+     * Update a player
+     */
+    public function update(Request $request, int $id): mixed
+    {
+        $player = Player::find($id);
+
+        if (! $player) {
+            return response()->json([
+                'message' => 'Player not found',
+            ], 404);
+        }
+
+        $validated = $request->validate([
+            'first_name' => 'sometimes|required|max:255',
+            'last_name' => 'sometimes|required|max:255',
+            'gender' => 'sometimes|required|in:'. implode(',', PlayerGender::values()),
+            'birthdate' => 'sometimes|required|date|before_or_equal:' . Carbon::now()->subYears(10),
+        ]);
+
+        $player->update($validated);
+
+        return response()->json([
+            'message' => 'Player updated successfully',
+            'player' => $player,
+        ], 200);
+    }
 }
