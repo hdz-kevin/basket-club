@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PlayerGender;
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -48,5 +50,25 @@ class PlayerController extends Controller
         }
 
         return response()->json($players, 200);
+    }
+
+    /**
+     * Store a new player into the database
+     */
+    public function store(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gender' => 'required|in:'. implode(',', PlayerGender::values()),
+            'birthdate' => 'required|date|before_or_equal:' . Carbon::now()->subYears(10),
+        ]);
+
+        $player = Player::create($validated);
+
+        return response()->json([
+            'message' => 'Player created successfully',
+            'player' => $player,
+        ], 201);
     }
 }

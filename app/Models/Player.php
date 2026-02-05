@@ -13,6 +13,6 @@ class Player extends Model
         'first_name',
         'last_name',
         'gender',
-        'date_birth',
+        'birthdate',
     ];
 }
