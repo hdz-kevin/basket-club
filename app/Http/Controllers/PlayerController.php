@@ -99,4 +99,24 @@ class PlayerController extends Controller
             'player' => $player,
         ], 200);
     }
+
+    /**
+     * Delete a player
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        $player = Player::find($id);
+
+        if (! $player) {
+            return response()->json([
+                'message' => 'Player not found',
+            ], 404);
+        }
+
+        $player->delete();
+
+        return response()->json([
+            'message' => 'Player deleted successfully',
+        ], 200);
+    }
 }
