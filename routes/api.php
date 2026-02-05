@@ -10,5 +10,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/players', [PlayerController::class, 'index'])->middleware(ApiForceAcceptHeader::class);
-Route::get('/teams', [TeamController::class, 'index'])->middleware(ApiForceAcceptHeader::class);
+Route::middleware(ApiForceAcceptHeader::class)->group(function () {
+    Route::get('/players', [PlayerController::class, 'index']);
+    Route::get('/players/{id}', [PlayerController::class, 'show']);
+
+    Route::get('/teams', [TeamController::class, 'index']);
+});
