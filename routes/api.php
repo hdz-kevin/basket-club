@@ -13,6 +13,7 @@ Route::get('/user', function (Request $request) {
 Route::middleware(ApiForceAcceptHeader::class)->group(function () {
     Route::get('/players', [PlayerController::class, 'index']);
     Route::get('/players/{id}', [PlayerController::class, 'show']);
+    Route::get('/players/first_name/{firstName}', [PlayerController::class, 'getByFirstName']);
 
     Route::get('/teams', [TeamController::class, 'index']);
 });

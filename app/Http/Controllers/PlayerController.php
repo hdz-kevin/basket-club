@@ -33,4 +33,20 @@ class PlayerController extends Controller
 
         return response()->json($player, 200);
     }
+
+    /**
+     * Get players by first name
+     */
+    public function getByFirstName(string $firstName): JsonResponse
+    {
+        $players = Player::where('first_name', $firstName)->get();
+
+        if ($players->isEmpty()) {
+            return response()->json([
+                'message' => 'No players found',
+            ], 404);
+        }
+
+        return response()->json($players, 200);
+    }
 }
