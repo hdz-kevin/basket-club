@@ -29,6 +29,7 @@ class PlayerFactory extends Factory
             'last_name' => fake('es')->lastName($nameByGender),
             'gender' => $gender,
             'birthdate' => fake()->dateTimeBetween('-50 years', '-15 years')
+                                 ->format('Y-m-d'),
         ];
     }
 }
