@@ -22,4 +22,5 @@ Route::middleware(ApiForceAcceptHeader::class)->group(function () {
     Route::get('/teams/{id}', [TeamController::class, 'show']);
     Route::post('/teams', [TeamController::class, 'store']);
     Route::put('/teams/{id}', [TeamController::class, 'update']);
+    Route::delete('/teams/{id}', [TeamController::class, 'destroy']);
 });

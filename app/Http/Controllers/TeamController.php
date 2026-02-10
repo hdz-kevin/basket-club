@@ -83,4 +83,22 @@ class TeamController extends Controller
             'team' => $team,
         ], HttpResponse::HTTP_OK);
     }
+
+    /**
+     * Delete a team
+     */
+    public function destroy(int $id)
+    {
+        $team = Team::find($id);
+
+        if (! $team) {
+            return response()
+                ->json(['message' => 'Team not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        $team->delete();
+
+        return response()
+            ->json(['message' => 'Team deleted successfully'], HttpResponse::HTTP_OK);
+    }
 }
