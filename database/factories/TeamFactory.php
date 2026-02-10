@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\PlayerGender;
 use App\Enums\TeamCategory;
+use App\Enums\TeamGender;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class TeamFactory extends Factory
         return [
             'name' => fake()->company,
             'category' => fake()->randomElement(TeamCategory::values()),
-            'gender' => fake()->randomElement(PlayerGender::values()),
+            'gender' => fake()->randomElement(TeamGender::values()),
         ];
     }
 }
