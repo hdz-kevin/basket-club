@@ -19,4 +19,5 @@ Route::middleware(ApiForceAcceptHeader::class)->group(function () {
     Route::delete('/players/{id}', [PlayerController::class, 'destroy']);
 
     Route::get('/teams', [TeamController::class, 'index']);
+    Route::get('/teams/{id}', [TeamController::class, 'show']);
 });
