@@ -108,7 +108,8 @@ class PlayerTest extends TestCase
     {
         $player = Player::factory()->create();
 
-        $this->delete("{$this->version}/players/{$player->id}")->assertStatus(200);
-        $this->get("{$this->version}/players/{$player->id}")->assertStatus(404);
+        $this->delete("{$this->version}/players/{$player->id}")
+             ->assertStatus(200);
+        $this->assertDatabaseCount('players', 0);
     }
 }
