@@ -37,6 +37,23 @@ class PlayerController extends Controller
     }
 
     /**
+     * Get a player's medical record by player id
+     */
+    public function showMedicalRecord(int $id): JsonResponse
+    {
+        /** @var Player */
+        $player = Player::find($id);
+
+        if (! $player) {
+            return response()->json([
+                'message' => 'Player not found',
+            ], 404);
+        }
+
+        return response()->json($player->medicalRecord, 200);
+    }
+
+    /**
      * Get players by first name
      */
     public function getByFirstName(string $firstName): JsonResponse
