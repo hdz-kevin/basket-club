@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Middleware\ApiForceAcceptHeader;
@@ -24,4 +25,6 @@ Route::middleware(ApiForceAcceptHeader::class)->group(function () {
     Route::post('/teams', [TeamController::class, 'store']);
     Route::put('/teams/{id}', [TeamController::class, 'update']);
     Route::delete('/teams/{id}', [TeamController::class, 'destroy']);
+
+    Route::get('/medicalrecords', [MedicalRecordController::class, 'index']);
 });
