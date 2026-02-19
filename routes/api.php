@@ -28,4 +28,5 @@ Route::middleware([ApiForceAcceptHeader::class])->group(function () {
 
     Route::get('/medicalrecords', [MedicalRecordController::class, 'index']);
     Route::get('/medicalrecords/{id}', [MedicalRecordController::class, 'show']);
+    Route::get('/medicalrecords/{id}/player', [MedicalRecordController::class, 'showPlayer']);
 });
