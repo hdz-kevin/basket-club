@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::middleware(ApiForceAcceptHeader::class)->group(function () {
+Route::middleware([ApiForceAcceptHeader::class])->group(function () {
     Route::get('/players', [PlayerController::class, 'index']);
     Route::get('/players/{id}', [PlayerController::class, 'show']);
     Route::get('/players/{id}/medicalrecord', [PlayerController::class, 'showMedicalRecord']);
@@ -27,4 +27,5 @@ Route::middleware(ApiForceAcceptHeader::class)->group(function () {
     Route::delete('/teams/{id}', [TeamController::class, 'destroy']);
 
     Route::get('/medicalrecords', [MedicalRecordController::class, 'index']);
+    Route::get('/medicalrecords/{id}', [MedicalRecordController::class, 'show']);
 });

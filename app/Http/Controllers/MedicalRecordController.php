@@ -18,4 +18,19 @@ class MedicalRecordController extends Controller
 
         return response()->json($medicalRecords, HttpResponse::HTTP_OK);
     }
+
+    /**
+     * Show a medical record by id
+     */
+    public function show(int $id): JsonResponse
+    {
+        $medicalRecord = MedicalRecord::find($id);
+
+        if (! $medicalRecord) {
+            return response()
+                ->json(['message' => 'Medical record not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($medicalRecord, HttpResponse::HTTP_OK);
+    }
 }
