@@ -13,7 +13,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::with('team')->get();
+        $games = Game::all();
 
         return response()->json($games, HttpResponse::HTTP_OK);
     }
@@ -23,7 +23,7 @@ class GameController extends Controller
      */
     public function show(int $id)
     {
-        $game = Game::with('team')->find($id);
+        $game = Game::find($id);
 
         if (! $game) {
             return response()
