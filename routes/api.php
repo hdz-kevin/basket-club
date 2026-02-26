@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
@@ -29,4 +30,7 @@ Route::middleware([ApiForceAcceptHeader::class])->group(function () {
     Route::get('/medicalrecords', [MedicalRecordController::class, 'index']);
     Route::get('/medicalrecords/{id}', [MedicalRecordController::class, 'show']);
     Route::get('/medicalrecords/{id}/player', [MedicalRecordController::class, 'showPlayer']);
+
+    Route::get('/games', [GameController::class, 'index']);
+    Route::get('/games/{id}', [GameController::class, 'show']);
 });
