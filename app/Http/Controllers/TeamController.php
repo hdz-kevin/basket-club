@@ -37,6 +37,21 @@ class TeamController extends Controller
     }
 
     /**
+     * List all games for a team
+     */
+    public function games(int $id)
+    {
+        $team = Team::find($id);
+
+        if (! $team) {
+            return response()
+                ->json(['message' => 'Team not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($team->games, HttpResponse::HTTP_OK);
+    }
+
+    /**
      * Store a new team into the database
      */
     public function store(Request $request): JsonResponse
