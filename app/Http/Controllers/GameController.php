@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -21,7 +22,7 @@ class GameController extends Controller
     /**
      * Show game by id
      */
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         $game = Game::find($id);
 
@@ -32,4 +33,20 @@ class GameController extends Controller
 
         return response()->json($game, HttpResponse::HTTP_OK);
     }
-}
+
+    /**
+     * Get the team that owns a game
+     */
+    public function team(int $id): JsonResponse
+    {
+        /** @var Game */
+        $game = Game::find($id);
+
+        if (! $game) {
+            return response()
+                ->json(['message' => 'Game not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($game->team, HttpResponse::HTTP_OK);
+    }
+} 
