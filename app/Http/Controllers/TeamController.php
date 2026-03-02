@@ -39,7 +39,7 @@ class TeamController extends Controller
     /**
      * List all games for a team
      */
-    public function games(int $id)
+    public function games(int $id): JsonResponse
     {
         $team = Team::find($id);
 
@@ -76,7 +76,7 @@ class TeamController extends Controller
     /**
      * Update a team
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): JsonResponse
     {
         $team = Team::find($id);
 
@@ -102,7 +102,7 @@ class TeamController extends Controller
     /**
      * Delete a team
      */
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         $team = Team::find($id);
 
@@ -115,5 +115,20 @@ class TeamController extends Controller
 
         return response()
             ->json(['message' => 'Team deleted successfully'], HttpResponse::HTTP_OK);
+    }
+
+    /**
+     * Get the most recent game for a team
+     */
+    public function lastGame(int $id): JsonResponse
+    {
+        $team = Team::find($id);
+
+        if (! $team) {
+            return response()
+                ->json(['message' => 'Team not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($team->latestGame, HttpResponse::HTTP_OK);
     }
 }

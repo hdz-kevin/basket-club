@@ -28,6 +28,7 @@ Route::middleware([ApiForceAcceptHeader::class])->group(function () {
     Route::post('/teams', [TeamController::class, 'store']);
     Route::put('/teams/{id}', [TeamController::class, 'update']);
     Route::delete('/teams/{id}', [TeamController::class, 'destroy']);
+    Route::get('/teams/{id}/last-game', [TeamController::class, 'lastGame']);
 
     Route::get('/medicalrecords', [MedicalRecordController::class, 'index']);
     Route::get('/medicalrecords/{id}', [MedicalRecordController::class, 'show']);
