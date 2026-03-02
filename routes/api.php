@@ -3,6 +3,7 @@
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\QueriesController;
 use App\Http\Controllers\TeamController;
 use App\Http\Middleware\ApiForceAcceptHeader;
 use Illuminate\Http\Request;
@@ -35,4 +36,7 @@ Route::middleware([ApiForceAcceptHeader::class])->group(function () {
     Route::get('/games', [GameController::class, 'index']);
     Route::get('/games/{id}', [GameController::class, 'show']);
     Route::get('/games/{id}/team', [GameController::class, 'team']);
+
+    // Some "advanced" queries
+    Route::get('/teams-with-games/{id?}', [QueriesController::class, 'teamsWithGames']);
 });
