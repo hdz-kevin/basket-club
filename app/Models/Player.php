@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Player extends Model
@@ -23,5 +24,13 @@ class Player extends Model
     public function medicalRecord(): HasOne
     {
         return $this->hasOne(MedicalRecord::class);
+    }
+
+    /**
+     * Get the teams the player is on.
+     */
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
     }
 }

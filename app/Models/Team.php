@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -39,5 +40,13 @@ class Team extends Model
     public function bestGame(): HasOne
     {
         return $this->hasOne(Game::class)->ofMany('score', 'max');
+    }
+
+    /**
+     * Get the team players
+     */
+    public function players(): BelongsToMany
+    {
+        return $this->belongsToMany(Player::class);
     }
 }
