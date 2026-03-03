@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PlayerSeeder::class,
             MedicalRecordSeeder::class,
             GameSeeder::class,
+            PlayerTeamSeeder::class,
         ]);
     }
 }
