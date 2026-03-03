@@ -32,4 +32,12 @@ class Team extends Model
     {
         return $this->hasOne(Game::class)->latestOfMany();
     }
+
+    /**
+     * Get the game with the most points scored by the team
+     */
+    public function bestGame(): HasOne
+    {
+        return $this->hasOne(Game::class)->ofMany('score', 'max');
+    }
 }

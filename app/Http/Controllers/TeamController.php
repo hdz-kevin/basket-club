@@ -131,4 +131,19 @@ class TeamController extends Controller
 
         return response()->json($team->latestGame, HttpResponse::HTTP_OK);
     }
+
+    /**
+     * Get the game with the most points scored by the team
+     */
+    public function bestGame(int $id): JsonResponse
+    {
+        $team = Team::find($id);
+
+        if (! $team) {
+            return response()
+                ->json(['message' => 'Team not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($team->bestGame, HttpResponse::HTTP_OK);
+    }
 }
