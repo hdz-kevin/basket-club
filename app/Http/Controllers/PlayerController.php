@@ -136,4 +136,19 @@ class PlayerController extends Controller
             'message' => 'Player deleted successfully',
         ], 200);
     }
+
+    /**
+     * Get all teams a player belongs to
+     */
+    public function teams(int $id): JsonResponse
+    {
+        /** @var Player */
+        $player = Player::find($id);
+
+        if (! $player) {
+            return response()->json(['message' => 'Player not found'], 404);
+        }
+
+        return response()->json($player->teams, 200);
+    }
 }
