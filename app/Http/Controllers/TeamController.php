@@ -146,4 +146,20 @@ class TeamController extends Controller
 
         return response()->json($team->bestGame, HttpResponse::HTTP_OK);
     }
+
+    /**
+     * Get all players for a team
+     */
+    public function players(int $id): JsonResponse
+    {
+        /** @var Team */
+        $team = Team::find($id);
+
+        if (! $team) {
+            return response()
+                ->json(['message' => 'Team not found'], HttpResponse::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($team->players, HttpResponse::HTTP_OK);
+    }
 }
