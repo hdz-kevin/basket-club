@@ -17,10 +17,10 @@ class PlayerTeamSeeder extends Seeder
         $teams = Team::all();
         $players = Player::all();
 
-        foreach ($teams as $team) {
+        $teams->each(fn (Team $team) =>
             $team->players()->attach(
                 $players->random(10)->pluck('id')->toArray()
-            );
-        }
+            )
+        );
     }
 }
