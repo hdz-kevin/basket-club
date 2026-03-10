@@ -43,4 +43,5 @@ Route::middleware([ApiForceAcceptHeader::class])->group(function () {
     Route::get('/teams/{id}/best-game', [TeamController::class, 'bestGame']);
     Route::get('/teams/{id}/players', [TeamController::class, 'players']);
     Route::get('/players/{id}/teams', [PlayerController::class, 'teams']);
+    Route::get('/users/{id}/medicalrecord', [QueriesController::class, 'userMedicalRecord']);
 });
