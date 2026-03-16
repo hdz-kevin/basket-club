@@ -25,7 +25,7 @@ class PlayerController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $player = Player::find($id);
+        $player = Player::with('image')->find($id);
 
         if (! $player) {
             return response()->json([

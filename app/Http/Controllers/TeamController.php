@@ -26,7 +26,7 @@ class TeamController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $team = Team::find($id);
+        $team = Team::with('image')->find($id);
 
         if (! $team) {
             return response()
