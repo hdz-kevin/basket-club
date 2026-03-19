@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('player_id');
             $table->string('medical_public_id', 128);
             $table->enum('blood_type', BloodType::values());
-            $table->string('allergies', 255);
-            $table->string('injuries', 255);
+            $table->string('allergies', 255)->nullable();
+            $table->string('injuries', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BloodType;
 use App\Enums\PlayerGender;
+use App\Models\MedicalRecord;
 use App\Models\Player;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -150,5 +152,40 @@ class PlayerController extends Controller
         }
 
         return response()->json($player->teams, 200);
+    }
+
+    /**
+     * Store a new medical record for a player
+     */
+    public function storeMedicalRecord(Request $request, int $id): JsonResponse
+    {
+        $player = Player::find($id);
+
+        if (! $player) {
+            return response()->json([
+                'message' => 'Player not found',
+            ], 404);
+        }
+
+        if ($player->medicalRecord) {
+            return response()->json([
+                'message' => 'Player already has a medical record',
+            ], 400);
+        }
+
+        $validated = $request->validate([
+            'medical_public_id' => 'required|max:128',
+            'blood_type' => 'required|in:'.implode(',', BloodType::values()),
+            'allergies' => 'nullable|max:255',
+            'injuries' => 'nullable|max:255',
+        ]);
+
+        $player->medicalRecord()->create($validated);
+        $player->refresh();
+
+        return response()->json([
+            'message' => 'Medical record created successfully',
+            'medical_record' => $player->medicalRecord,
+        ], 201);
     }
 }

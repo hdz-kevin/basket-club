@@ -10,6 +10,13 @@ class MedicalRecord extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'medical_public_id',
+        'blood_type',
+        'allergies',
+        'injuries',
+    ];
+
     /**
      * Get the player that owns the medical record.
      */
