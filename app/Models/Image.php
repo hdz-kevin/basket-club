@@ -16,6 +16,8 @@ class Image extends Model
         'imageable_type',
     ];
 
+    protected $visible = ['id', 'url'];
+
     /**
      * Get the parent imageable model (player or team).
      */
